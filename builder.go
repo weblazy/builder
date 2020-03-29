@@ -6,9 +6,10 @@ package builder
 
 import (
 	sql2 "database/sql"
-	"lazygo/core/database/sqlx"
 	"fmt"
 	"sort"
+
+	"github.com/weblazy/core/database/sqlx"
 )
 
 type optype byte
@@ -384,7 +385,7 @@ func (b *Builder) ToSQL() (string, []interface{}, error) {
 	return sql, w.args, nil
 }
 
-func (b *Builder) QueryRow(v interface{},conn sqlx.SqlConn) error{
+func (b *Builder) QueryRow(v interface{}, conn sqlx.SqlConn) error {
 	sql, args, err := b.ToSQL()
 	if err != nil {
 		return err
@@ -393,7 +394,7 @@ func (b *Builder) QueryRow(v interface{},conn sqlx.SqlConn) error{
 	return err
 }
 
-func (b *Builder) QueryRows(v interface{},conn sqlx.SqlConn) error{
+func (b *Builder) QueryRows(v interface{}, conn sqlx.SqlConn) error {
 	sql, args, err := b.ToSQL()
 	if err != nil {
 		return err
