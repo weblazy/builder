@@ -6,6 +6,7 @@ package builder
 
 import (
 	sql2 "database/sql"
+	"lazygo/core/database/sqlx"
 	"fmt"
 	"sort"
 )
@@ -381,6 +382,24 @@ func (b *Builder) ToSQL() (string, []interface{}, error) {
 	}
 
 	return sql, w.args, nil
+}
+
+func (b *Builder) QueryRow(v interface{},conn sqlx.SqlConn) error{
+	sql, args, err := b.ToSQL()
+	if err != nil {
+		return err
+	}
+	err = conn.QueryRow(v, sql, args...)
+	return err
+}
+
+func (b *Builder) QueryRows(v interface{},conn sqlx.SqlConn) error{
+	sql, args, err := b.ToSQL()
+	if err != nil {
+		return err
+	}
+	err = conn.QueryRows(v, sql, args...)
+	return err
 }
 
 // ToBoundSQL

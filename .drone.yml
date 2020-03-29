@@ -1,6 +1,6 @@
 workspace:
   base: /go
-  path: src/github.com/go-xorm/builder
+  path: src/github.com/weblazy/builder
 
 clone:
   git:
